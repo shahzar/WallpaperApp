@@ -1,14 +1,11 @@
 package com.shzlabs.wallsplash;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,22 +15,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.shzlabs.wallsplash.Remote.WallpaperApi;
-import com.shzlabs.wallsplash.adapter.ImageListAdapter;
 import com.shzlabs.wallsplash.data.model.OrderSelectedEvent;
 import com.shzlabs.wallsplash.data.model.Wallpaper;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,16 +40,6 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         ctx = this;
 
-        // Floating action button
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         // Drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -68,9 +48,7 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
+        navigationView.getMenu().getItem(0).setChecked(true);
 
     }
 
@@ -100,8 +78,18 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
+        // TODO Remove this, added for testing purpose.
+        /*if (id == R.id.action_start_fragment) {
+            ArrayList<Wallpaper> wallpaperList = new ArrayList<>();
+            ImageSliderFragment fragment = ImageSliderFragment.newInstance(0);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            fragment.show(ft, "ImageSliderFragment");
+            return true;
+        }*/
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -122,13 +110,7 @@ public class MainActivity extends AppCompatActivity
                 MainFragment.order = MainFragment.ORDER_BY_LATEST;
                 EventBus.getDefault().post(new OrderSelectedEvent(MainFragment.ORDER_BY_LATEST));
             }
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 

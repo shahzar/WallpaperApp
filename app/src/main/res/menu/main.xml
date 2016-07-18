@@ -6,4 +6,12 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <!-- TODO Remove this-->
+    <!--<item
+        android:id="@+id/action_start_fragment"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />-->
+
 </menu>

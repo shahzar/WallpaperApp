@@ -10,10 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.shzlabs.wallsplash.Remote.WallpaperApi;
@@ -29,6 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,8 +41,10 @@ public class MainFragment extends Fragment implements ImageListAdapter.RecyclerV
     Context ctx;
     @BindView(R.id.images_recycler_view)
     RecyclerView imageRecyclerView;
+    @BindView(R.id.retryButton)
+    Button retryButton;
     ImageListAdapter imageListAdapter;
-    List<Wallpaper> wallpaperList;
+    public static List<Wallpaper> wallpaperList;
     boolean isLoading = false;
     static int page = 1;
 
@@ -79,13 +81,15 @@ public class MainFragment extends Fragment implements ImageListAdapter.RecyclerV
         // Set up RecyclerView
         wallpaperList = new ArrayList<>();
         final RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(ctx, 2);
-        imageListAdapter = new ImageListAdapter(ctx, wallpaperList, this);
+        imageListAdapter = new ImageListAdapter(ctx, this);
         imageRecyclerView.setLayoutManager(mLayoutManager);
         imageRecyclerView.setItemAnimator(new DefaultItemAnimator());
         imageRecyclerView.setAdapter(imageListAdapter);
 
         // Load images on app run
         downloadImages(order);
+
+
 
         // Load more images onScroll end
         imageRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -128,6 +132,13 @@ public class MainFragment extends Fragment implements ImageListAdapter.RecyclerV
         return rootView;
     }
 
+    @OnClick(R.id.retryButton)
+    public void retryLoading(){
+        retryButton.setVisibility(View.GONE);
+        imageRecyclerView.setVisibility(View.VISIBLE);
+        downloadImages(order);
+    }
+
     /**
      * Fetch and load images via REST API using Retrofit
      *
@@ -136,6 +147,13 @@ public class MainFragment extends Fragment implements ImageListAdapter.RecyclerV
     public void downloadImages(String orderBy){
 
         int itemsPerPage = 20;
+
+        // Set Toolbar subtitle
+        try {
+            ((MainActivity)getActivity()).getSupportActionBar().setSubtitle(orderBy.substring(0,1).toUpperCase() + orderBy.substring(1));
+        }catch (Exception e){
+            Log.e(TAG, "downloadImages: Exception " + e );
+        }
 
         // Retrofit connect
         WallpaperApi.Factory.getInstance().getWallpapers(orderBy, itemsPerPage, page).enqueue(new Callback<List<Wallpaper>>() {
@@ -154,6 +172,8 @@ public class MainFragment extends Fragment implements ImageListAdapter.RecyclerV
                 isLoading = false;
                 // reduce page by 1 as page failed to load
                 page--;
+                imageRecyclerView.setVisibility(View.GONE);
+                retryButton.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -173,6 +193,7 @@ public class MainFragment extends Fragment implements ImageListAdapter.RecyclerV
         downloadImages(order);
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
@@ -187,7 +208,7 @@ public class MainFragment extends Fragment implements ImageListAdapter.RecyclerV
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
-        ImageSliderFragment fragment = ImageSliderFragment.newInstance((ArrayList<Wallpaper>) wallpaperList, position);
+        ImageSliderFragment fragment = ImageSliderFragment.newInstance(position);
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         fragment.show(ft, "ImageSliderFragment");
     }
