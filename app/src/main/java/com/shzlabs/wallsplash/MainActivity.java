@@ -2,6 +2,7 @@ package com.shzlabs.wallsplash;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -111,7 +112,13 @@ public class MainActivity extends AppCompatActivity
                 EventBus.getDefault().post(new OrderSelectedEvent(MainFragment.ORDER_BY_LATEST));
             }
         } else if (id == R.id.nav_share) {
-
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            String content = Uri.encode("*") + getResources().getString(R.string.app_name) + Uri.encode("*") +
+                            "\n" + getResources().getString(R.string.app_share_content) + "\n\n" +
+                            getResources().getString(R.string.app_link);
+            intent.putExtra(Intent.EXTRA_TEXT, content);
+            startActivity(Intent.createChooser(intent, "Share app"));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

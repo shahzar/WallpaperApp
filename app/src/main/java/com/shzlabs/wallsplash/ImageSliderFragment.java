@@ -4,8 +4,10 @@ package com.shzlabs.wallsplash;
 import android.animation.Animator;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -172,7 +174,7 @@ public class ImageSliderFragment extends DialogFragment implements Toolbar.OnMen
                             }
                         }
 
-                        downloadImageToLocal(fileName, imageUri);
+                        downloadImageToLocal(fileName, imageUri, false);
 
 
                     }
@@ -195,7 +197,7 @@ public class ImageSliderFragment extends DialogFragment implements Toolbar.OnMen
                     }
                 }
 
-                downloadImageToLocal(fileName, imageUri);
+                downloadImageToLocal(fileName, imageUri, true);
 
                 break;
             }
@@ -204,7 +206,7 @@ public class ImageSliderFragment extends DialogFragment implements Toolbar.OnMen
         return false;
     }
 
-    public void downloadImageToLocal(String fileName, String imageUri){
+    public void downloadImageToLocal(String fileName, String imageUri, final boolean share){
 
         // Download image
         final String finalFileName = fileName.toLowerCase();
@@ -240,6 +242,10 @@ public class ImageSliderFragment extends DialogFragment implements Toolbar.OnMen
 
                                 Toast.makeText(ctx, "Download successful!", Toast.LENGTH_SHORT).show();
 
+                                if(share){
+                                    shareImage(finalFileName);
+                                }
+
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -253,6 +259,23 @@ public class ImageSliderFragment extends DialogFragment implements Toolbar.OnMen
                         Toast.makeText(ctx, "Error fetching image.", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public void shareImage(String fileName){
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/jpeg");
+
+        Log.d(TAG, "shareImage: Share image location: " +
+                "file:///" +
+                Environment.getExternalStorageDirectory() +
+                File.separator + "WallSplash" +
+                File.separator + fileName);
+        share.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///" +
+                                                        Environment.getExternalStorageDirectory() +
+                                                        File.separator + "WallSplash" +
+                                                        File.separator + fileName));
+        startActivity(Intent.createChooser(share, "Share Image"));
 
     }
 
