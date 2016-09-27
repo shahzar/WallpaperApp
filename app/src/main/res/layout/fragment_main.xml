@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shzlabs.wallsplash.MainFragment">
+    tools:context="com.shzlabs.wallpaper.MainFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/images_recycler_view"

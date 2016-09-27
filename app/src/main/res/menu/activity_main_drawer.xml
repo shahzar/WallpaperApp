@@ -5,11 +5,13 @@
         <item
             android:id="@+id/nav_popular"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Popular" />
+            android:title="Popular"
+            android:orderInCategory="1"/>
         <item
             android:id="@+id/nav_latest"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Latest" />
+            android:title="Latest"
+            android:orderInCategory="2"/>
         <!--<item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
@@ -20,12 +22,13 @@
             android:title="Tools" />-->
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Communicate"
+        android:orderInCategory="3">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Share"/>
             <!--<item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"

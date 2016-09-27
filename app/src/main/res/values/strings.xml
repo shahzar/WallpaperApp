@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WallSplash</string>
+    <string name="app_name">WallpaperApp</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -8,9 +8,16 @@
     <string name="retry">Retry</string>
 
     <!-- Share app content -->
-    <string name="app_share_name">WallSplash</string>
+    <string name="app_share_name">WallpaperApp</string>
     <string name="app_share_content">Checkout this cool wallpaper app!</string>
     <string name="app_link">[Link coming soon]</string>
+
+    <!-- Directories -->
+    <string name="directory_share">share</string>
+
+    <!-- Share image content -->
+    <string name="image_share_extra_text">Image shared using WallpaperApp!</string>
+
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -30,14 +37,26 @@
     <!--<string name="pref_title_display_name">Display name</string>-->
     <!--<string name="pref_default_display_name">John Smith</string>-->
 
-    <string name="pref_title_select_thumbnail_quality">Select thumbnail quality</string>
-    <string-array name="pref_example_list_titles">
+    <string name="pref_title_select_thumbnail_quality">Grid image quality</string>
+    <string name="pref_title_select_default_display_type">Default selected type</string>
+    <string name="download_notification_title">WallpaperApp Image Download</string>
+    <string name="download_notification_status_ongoing">Downloading Image</string>
+    <string-array name="pref_grid_thumbnail_quality_list_titles">
         <item>High</item>
         <item>Normal</item>
     </string-array>
-    <string-array name="pref_example_list_values">
+    <string-array name="pref_grid_thumbnail_quality_list_values">
         <item>1</item>
         <item>0</item>
     </string-array>
+    <string-array name="pref_default_selected_type_list_titles">
+        <item>Popular</item>
+        <item>Latest</item>
+    </string-array>
+    <string-array name="pref_default_selected_type_list_values">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
+
 
 </resources>

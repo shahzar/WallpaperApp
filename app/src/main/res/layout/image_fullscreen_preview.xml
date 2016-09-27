@@ -19,4 +19,26 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
+    <LinearLayout
+        android:id="@+id/creditsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="#cc111111"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:id="@+id/creditsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Photo by Anonymous / Unsplash"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+
 </RelativeLayout>
