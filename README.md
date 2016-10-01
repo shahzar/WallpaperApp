@@ -2,10 +2,11 @@
 A simple wallpaper app done utilizing Unsplash's images Api, Glide Android library, Retrofit library etc. 
 
 ### Screenshots
-[screenshot1](screenshots/screenshot1.jpg)
-[screenshot2](screenshots/screenshot2.jpg)
-[screenshot3](screenshots/screenshot3.jpg)
-[screenshot4](screenshots/screenshot4.jpg)
+<img src="screenshots/cover.jpg" width="600"/><br/>
+<img src="screenshots/screenshot1.jpg" width="300"/>
+<img src="screenshots/screenshot2.jpg" width="300"/><br/>
+<img src="screenshots/screenshot3.jpg" width="300"/>
+<img src="screenshots/screenshot4.jpg" width="300"/>
 
 ### Demo
 [Download Apk](https://github.com/shahzar/WallpaperApp/raw/master/app/WallpaperApp.apk)
