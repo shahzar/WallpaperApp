@@ -9,4 +9,4 @@ A simple wallpaper app done utilizing Unsplash's images Api, Glide Android libra
 <img src="screenshots/screenshot4.jpg" width="300"/>
 
 ### Demo
-[Download Apk](https://github.com/shahzar/WallpaperApp/raw/master/app/WallpaperApp.apk)
+[Download Apk](https://play.google.com/store/apps/details?id=com.shzlabs.wallpaperapp)
