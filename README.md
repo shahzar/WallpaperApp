@@ -1,5 +1,5 @@
 ## WallpaperApp
-A simple wallpaper app done utilizing Unsplash's images Api, Glide Android library, Retrofit library etc. 
+A simple wallpaper app done utilizing [Unsplash's images Api](https://unsplash.com/developers), [Glide Android library](https://github.com/bumptech/glide), [Retrofit](https://square.github.io/retrofit/) library etc. 
 
 ### Screenshots
 <img src="screenshots/cover.jpg" width="600"/><br/>
@@ -9,4 +9,4 @@ A simple wallpaper app done utilizing Unsplash's images Api, Glide Android libra
 <img src="screenshots/screenshot4.jpg" width="300"/>
 
 ### Demo
-[Download Apk](https://play.google.com/store/apps/details?id=com.shzlabs.wallpaperapp)
+[Download from PlayStore](https://play.google.com/store/apps/details?id=com.shzlabs.wallpaperapp)
